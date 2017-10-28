@@ -6,3 +6,8 @@ Learn PHP in this repository
 ```
 $ php -S localhost:8080
 ```
+
+## OPEN
+```
+http://localhost:8080
+```
