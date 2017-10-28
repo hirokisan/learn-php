@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * todo: learn how to use exception
+ *
+ */
 class CsvClass
 {
 
