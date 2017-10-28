@@ -73,28 +73,25 @@ function getCsv($csv_file_path)
 
 function is_valid($csv_file_path)
 {
-    if(!is_exist($csv_file_path)) return false;
-    if(!is_csv($csv_file_path)) return false;
+    try
+    {
+        is_exist($csv_file_path);
+        is_csv($csv_file_path);
+    }
+    catch (Exception $e)
+    {
+        print $e->getMessage();
+        return false;
+    }
 
     return true;
 }
 
 function is_exist($csv_file_path)
 {
-    try
+    if (!is_readable($csv_file_path))
     {
-        if (!is_readable($csv_file_path))
-        {
-            throw new Exception("ファイルが存在していないか読み込み可能ではありません。");
-        }
-
-        return true;
-
-    }
-    catch (Exception $e)
-    {
-        print $e->getMessage();
-        return false;
+        throw new Exception("ファイルが存在していないか読み込み可能ではありません。");
     }
 
 }
@@ -103,19 +100,8 @@ function is_csv($file)
 {
     $info = new SplFileInfo($file);
 
-    try
+    if ($info->getExtension() != 'csv')
     {
-        if ($info->getExtension() != 'csv')
-        {
-            throw new Exception("CSVファイルのみ対応しています。");
-        }
-
-        return true;
-
-    }
-    catch (Exception $e)
-    {
-        print $e->getMessage();
-        return false;
+        throw new Exception("CSVファイルのみ対応しています。");
     }
 }
