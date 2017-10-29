@@ -1,37 +1,29 @@
 <?php
 
 /**
- * todo: learn how to use exception
- *
+ * todo: write down phpdoc
  */
 class CsvClass
 {
 
     private $csv_file_path;
 
-    //public function __construct($file){
-    //    if(!$this->is_valid($file)) exit;
-
-    //    $this->csv_file_path = $file;
-    //}
-
     /**
-     * set()
+     * set method
      * set $file
      *
      * @param string
-     * todo: stop procedure if $file is not valid
-     *
+     * @return void
      */
     public function set($file)
     {
-        if(!$this->is_valid($file));
+        $this->is_valid($file);
 
         $this->csv_file_path = $file;
     }
 
     /**
-     * get()
+     * get method
      * convert csv file to array
      *
      * @see http://www.php.net/manual/ja/class.splfileobject.php#splfileobject.constants SplFileObject
@@ -45,17 +37,6 @@ class CsvClass
         $count = 0;
 
         $file = new SplFileObject($this->csv_file_path);
-        /**
-         * 設定しても空行が読み飛ばされないのでコメントアウト。原因調査中です。
-         *
-         // CSV 列として行を読み込みます
-         $file->setFlags(SplFileObject::READ_CSV);
-        //ファイルの空行を読み飛ばします
-        $file->setFlags(SplFileObject::READ_AHEAD);
-        $file->setFlags(SplFileObject::SKIP_EMPTY);
-        // 行末の改行を読み飛ばします
-        $file->setFlags(SplFileObject::DROP_NEW_LINE);
-         */
 
         while(!$file->eof())
         {
@@ -95,27 +76,17 @@ class CsvClass
 
     private function is_valid($file)
     {
-        try
-        {
-            $this->is_exist($file);
-            $this->is_csv($file);
-        }
-        catch (Exception $e)
-        {
-            print "エラーが発生しました";
-            error_log($e->getMessage());
-            return false;
-        }
-
-        return true;
+        $this->is_exist($file);
+        $this->is_csv($file);
     }
 
     /**
-     * is_exist()
+     * is_exist method
      * check $file is exist and readable or not
      *
      * @param string
-     * @return bool
+     * @return void
+     * @throws Exception ファイルが存在していないか読み込み可能ではない場合
      */
     private function is_exist($file)
     {
@@ -123,15 +94,15 @@ class CsvClass
         {
             throw new Exception("ファイルが存在していないか読み込み可能ではありません。");
         }
-
     }
 
     /**
-     * is_csv()
+     * is_csv method
      * check $file is csv or not
      *
      * @param string
-     * @return bool
+     * @return void
+     * @throws Exception CSVファイル以外の場合
      */
     private function is_csv($file)
     {

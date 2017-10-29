@@ -4,6 +4,17 @@ require './CsvClass.php';
 
 $csv_file_path = './sample.csv';
 
+/**
+ * Instance: use "try {} catch () {}"
+ * Class   : throw exeption
+ */
 $csv = new CsvClass;
-$csv->set($csv_file_path);
-var_dump($csv->get());
+try
+{
+    $csv->set($csv_file_path);
+    var_dump($csv->get());
+}
+catch ( Exception $e )
+{
+    print $e->getMessage();
+}
