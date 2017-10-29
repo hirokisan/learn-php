@@ -1,8 +1,13 @@
 <?php
 
-require './CsvClass.php';
+/**
+ * When you use CLI, pay attention to current dir
+ * check current dir: getcwd()
+ */
 
-$csv_file_path = './sample.csv';
+require __DIR__ . '/CsvClass.php';
+
+$csv_file_path = __DIR__ . '/sample.csv';
 
 /**
  * Instance: use "try {} catch () {}"
