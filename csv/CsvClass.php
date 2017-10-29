@@ -25,7 +25,7 @@ class CsvClass
      */
     public function set($file)
     {
-        if(!$this->is_valid($file)) return false;
+        if(!$this->is_valid($file));
 
         $this->csv_file_path = $file;
     }
@@ -102,7 +102,8 @@ class CsvClass
         }
         catch (Exception $e)
         {
-            print $e->getMessage();
+            print "エラーが発生しました";
+            error_log($e->getMessage());
             return false;
         }
 

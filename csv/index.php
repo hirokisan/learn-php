@@ -2,7 +2,7 @@
 
 require './CsvClass.php';
 
-$csv_file_path = './sample.cv';
+$csv_file_path = './sample.csv';
 
 $csv = new CsvClass;
 $csv->set($csv_file_path);
