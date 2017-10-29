@@ -17,4 +17,5 @@ try
 catch ( Exception $e )
 {
     print $e->getMessage();
+    error_log($e->getMessage());
 }
