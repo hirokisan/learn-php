@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <img id="img" src="" alt="">
+  <script>
+  var src = "https://storage.tenki.jp/storage/static-images/forecaster_diary/image/1/16/164/1641/main/20180807174208/large.jpg";
+
+  $.post('http://localhost:8080/encode-base64.php', 'img='+src)
+  .done(function(data){
+    data = JSON.parse(data);
+    console.log(data);
+    src = data.img
+  });
+
+  $.post('http://localhost:8080/api.php', 'name=aaa&img='+src)
+  .done(function(data){
+    data = JSON.parse(data);
+    console.log(data);
+  });
+
+  $.ajax({
+    url: "http://localhost:8080/api.php",
+    type: 'POST',
+    data: {'name': 'aaa', 'img': src}
+  })
+  .then(
+      function (data) {
+          data = JSON.parse(data);
+          console.log(data);
+      },
+      function () {
+          alert("読み込み失敗");
+  });
+  </script>
+</body>
+</html>
