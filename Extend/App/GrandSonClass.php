@@ -10,5 +10,3 @@ class GrandSon extends \Core\Child
     }
 }
 
-$son = new GrandSon();
-var_dump($son->get());
